@@ -20,6 +20,15 @@ const DetailsButton: FC<DetailsButtonProps> = ({ versionData }) => {
   return (
     <LinkWithArrow
       className="cursor-pointer"
+      role="button"
+      tabIndex={0}
+      aria-label={t('details')}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(versionData);
+        }
+      }}
       onClick={() => openModal(versionData)}
     >
       {t('details')}
