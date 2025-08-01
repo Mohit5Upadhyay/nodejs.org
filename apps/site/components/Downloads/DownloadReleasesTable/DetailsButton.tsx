@@ -1,10 +1,10 @@
 'use client';
 
-import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
 import { useTranslations } from 'next-intl';
 import type { FC } from 'react';
 import { use } from 'react';
 
+import LinkWithArrow from '#site/components/LinkWithArrow';
 import { ReleaseModalContext } from '#site/providers/releaseModalProvider';
 import type { NodeRelease } from '#site/types';
 
@@ -18,15 +18,13 @@ const DetailsButton: FC<DetailsButtonProps> = ({ versionData }) => {
   const { openModal } = use(ReleaseModalContext);
 
   return (
-    <button
-      type="button"
-      className="cursor-pointer text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-200"
+    <LinkWithArrow
       onClick={() => openModal(versionData)}
       aria-label={t('details')}
+      className="cursor-pointer"
     >
       {t('details')}
-      <ArrowUpRightIcon className="ml-1 inline w-3 fill-neutral-600 dark:fill-white" />
-    </button>
+    </LinkWithArrow>
   );
 };
 
