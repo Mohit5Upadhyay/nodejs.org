@@ -1,4 +1,5 @@
 import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
+import classNames from 'classnames';
 import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
@@ -12,10 +13,12 @@ type LinkWithArrowProps =
   | ({ href: string } & AnchorHTMLAttributes<HTMLAnchorElement>)
   | (Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> & { href?: never });
 
-const LinkWithArrow: FC<PropsWithChildren<LinkWithArrowProps>> = props => {
-  const { children, className, ...rest } = props;
-
-  if ('href' in props && props.href) {
+const LinkWithArrow: FC<PropsWithChildren<LinkWithArrowProps>> = ({
+  children,
+  className,
+  ...rest
+}) => {
+  if (rest.href) {
     return (
       <Link
         {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
@@ -33,7 +36,10 @@ const LinkWithArrow: FC<PropsWithChildren<LinkWithArrowProps>> = props => {
     <button
       type="button"
       {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
-      className={`${className || ''} text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-200`}
+      className={classNames(
+        className,
+        'text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-200'
+      )}
     >
       <span>
         {children}
